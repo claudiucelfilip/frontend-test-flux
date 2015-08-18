@@ -4,9 +4,15 @@ module.exports = function (server, plugin) {
 
     server.route({
         method: 'GET',
-        path: '/plugin/say-hey',
-        handler : plugin.sayHey,
-        config : {}
+        path: '/{filename}',
+        directory: {
+            path: plugin.options.path
+        },
+        handler: {
+            file: function (request) {
+                return request.params.filename;
+            }
+        }
     });
 
 };

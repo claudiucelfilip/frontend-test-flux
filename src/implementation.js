@@ -1,4 +1,6 @@
 'use strict';
+var Path = require('path');
+var Hapi = require('hapi');
 
 var plugin = {};
 
@@ -12,3 +14,17 @@ plugin.sayHey = function (request, reply) {
 };
 
 module.exports = constructor;
+
+
+
+
+var server = new Hapi.Server({
+    connections: {
+        routes: {
+            files: {
+                relativeTo: Path.join(__dirname, 'public')
+            }
+        }
+    }
+});
+
